@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
+import {
+  getAuth,
+  GoogleAuthProvider,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  signInWithPopup,
+} from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyDu_X5aRQGmUYVZpJ3HS81yJ8TP5djfmnE",
   authDomain: "with-me-83ab7.firebaseapp.com",
@@ -22,7 +27,6 @@ const signGoogle = () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
 
       const user = result.user;
-      console.log(user);
     })
     .catch((error) => {
       // Handle Errors here.
@@ -30,5 +34,37 @@ const signGoogle = () => {
       const errorMessage = error.message;
     });
 };
+
+const signWithPhonenumber = (phoneNumber) => {
+  window.recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
+    size: "invisible",
+    callback: () => {},
+  });
+  const appVerifier = window.recaptchaVerifier;
+
+  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    .then((confirmationResult) => {
+      window.confirmationResult = confirmationResult;
+      console.log(confirmationResult);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const verifyOTP = (code) => {
+  // console.log(window.confirmationResult);
+  // window.confirmationResult
+  //   .confirm(code)
+  //   .then((result) => {
+  //     // User signed in successfully.
+  //     const user = result.user;
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     // User couldn't sign in (bad verification code?)
+  //     // ...
+  //   });
+};
 export default signGoogle;
-export { app, auth, provider, signGoogle };
+export { app, auth, provider, signGoogle, signWithPhonenumber, verifyOTP };
