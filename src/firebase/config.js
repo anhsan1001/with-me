@@ -36,6 +36,7 @@ const signGoogle = () => {
 };
 
 const signWithPhonenumber = (phoneNumber) => {
+  console.log(phoneNumber);
   window.recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
     size: "invisible",
     callback: () => {},
@@ -45,26 +46,21 @@ const signWithPhonenumber = (phoneNumber) => {
   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
     .then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
-      console.log(confirmationResult);
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-const verifyOTP = (code) => {
-  // console.log(window.confirmationResult);
-  // window.confirmationResult
-  //   .confirm(code)
-  //   .then((result) => {
-  //     // User signed in successfully.
-  //     const user = result.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     // User couldn't sign in (bad verification code?)
-  //     // ...
-  //   });
+const verifyOtp = (otp) => {
+  window.confirmationResult
+    .confirm(otp)
+    .then((result) => {
+      const user = result.user;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
-export default signGoogle;
-export { app, auth, provider, signGoogle, signWithPhonenumber, verifyOTP };
+
+export { app, auth, provider, signGoogle, signWithPhonenumber, verifyOtp };
