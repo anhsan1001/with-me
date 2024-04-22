@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
   RecaptchaVerifier,
@@ -36,11 +37,12 @@ const signGoogle = () => {
 };
 
 const signWithPhonenumber = (phoneNumber) => {
-  console.log(phoneNumber);
-  window.recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
-    size: "invisible",
-    callback: () => {},
-  });
+  if (!window.recaptchaVerifier) {
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
+      size: "invisible",
+      callback: () => {},
+    });
+  }
   const appVerifier = window.recaptchaVerifier;
 
   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
@@ -63,4 +65,26 @@ const verifyOtp = (otp) => {
     });
 };
 
-export { app, auth, provider, signGoogle, signWithPhonenumber, verifyOtp };
+const createUserWithPassword = (email, password, handleShowLoign) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      if (user) {
+        handleShowLoign();
+      }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+};
+
+export {
+  app,
+  auth,
+  provider,
+  signGoogle,
+  signWithPhonenumber,
+  verifyOtp,
+  createUserWithPassword,
+};

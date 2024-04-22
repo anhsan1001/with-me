@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav-item {
+  @apply flex flex-row gap-5 text-xl;
+}
+
+.card-content {
+  @apply bg-color-bg rounded my-3;
+}

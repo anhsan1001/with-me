@@ -1,5 +1,3 @@
-import React from "react";
-
 const SliderMusic = () => {
   return (
     <div className="grid grid-cols-2 px-3 mt-8">

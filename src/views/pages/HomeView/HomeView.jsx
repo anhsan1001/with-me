@@ -1,28 +1,29 @@
-import { Link, Outlet } from "react-router-dom";
-import HomeContent from "../../../components/HomeContent";
+import { Outlet, useNavigate } from "react-router-dom";
 import Menu from "../../../components/Menu";
+import { auth } from "../../../firebase/config";
+import { useEffect } from "react";
 
 const HomeView = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      console.log(user);
+      if (!user) {
+        return navigate("/login");
+      }
+    });
+  }, []);
+
   return (
     <div className="grid grid-cols-4 gap-2">
-      <div className="col-span-1">
-        {" "}
+      <div className="col-span-1 ">
         <Menu />
       </div>
-      <div className="col-span-3">
-        {" "}
-        {/* <HomeContent /> */}
-        <nav>
-          <ul>
-            <li>
-              <Link to={`contacts/1`}>Your Name</Link>
-            </li>
-            <li>
-              <Link to={`contacts/2`}>Your Friend</Link>
-            </li>
-          </ul>
-        </nav>
+      <div className="col-span-2">
         <Outlet />
+      </div>
+      <div className="col-span-1 ">
+        <Menu />
       </div>
     </div>
   );
