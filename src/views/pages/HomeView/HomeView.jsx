@@ -2,12 +2,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Menu from "../../../components/Menu";
 import { auth } from "../../../firebase/config";
 import { useEffect } from "react";
+import ListFriend from "../../../components/ListFriend";
 
 const HomeView = () => {
   const navigate = useNavigate();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log(user);
       if (!user) {
         return navigate("/login");
       }
@@ -23,7 +23,7 @@ const HomeView = () => {
         <Outlet />
       </div>
       <div className="col-span-1 ">
-        <Menu />
+        <ListFriend />
       </div>
     </div>
   );

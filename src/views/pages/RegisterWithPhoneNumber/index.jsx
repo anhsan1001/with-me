@@ -1,6 +1,6 @@
 import { useState } from "react";
 import OTPInput from "react-otp-input";
-import { signWithPhonenumber, verifyOtp } from "../../../firebase/config";
+import { signWithPhonenumber, verifyOtp } from "../../../firebase/services";
 
 const RegisterWithPhoneNumber = () => {
   const [otp, setOtp] = useState("");

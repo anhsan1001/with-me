@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Music from "./views/pages/Music";
 import Messages from "./views/pages/Messages";
 import HomeContent from "./components/HomeContent";
+import AppProvider from "../Context/AppContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,7 +26,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AppProvider>
+      <RouterProvider router={router} />;
+    </AppProvider>
+  );
 }
 
 export default App;

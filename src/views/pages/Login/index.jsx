@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { auth, signGoogle } from "../../../firebase/config";
+import { auth } from "../../../firebase/config";
 import { useEffect, useState } from "react";
 import RegisterWithPhoneNumber from "../RegisterWithPhoneNumber";
 import RegisterWithEmailPassword from "../RegisterWithEmailPassword";
+import { signGoogle } from "../../../firebase/services";
 
 const Login = () => {
   const [isShow, setIsShow] = useState({

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUserWithPassword } from "../../../firebase/config";
+import { createUserWithPassword } from "../../../firebase/services";
 
 const RegisterWithEmailPassword = (props) => {
   const { handleShowLoign } = props;
