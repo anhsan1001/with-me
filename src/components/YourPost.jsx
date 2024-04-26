@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../Context/AppContext";
 
 const YourPost = () => {
   const [content, setContent] = useState("");
+  const { user } = useContext(AppContext);
   return (
-    <div className="mx-10 py-8">
-      <div className="grid gap-2 grid-cols-8">
+    <div className="px-10 py-8 card-post">
+      <div className="grid gap-1 grid-cols-8">
         <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAMD0lEQVR4nO1ZeXCTZRrvzuzMHn+su7M7swv5knC0XM33JWmaND1oSo+06ZE06X03bZM235embUq55HABy6IocguisILLiDoIKgiIgsihMrgcuopyLKJQkWN0UJCmv533DY1NL5pyrOvmN/Ob+fo23/H8nud9nud935CQIIIIIogggggiiCCCCCKIIH7C0M36pZjj4xgZP4NhhWcZGb+VYfmdIpnwMsPyK0UsbxOH148M+blBKq34NRMuTJSy/DmGFSCR8R0Kuf1airr6ukVr7YhV26+NjeBvkP8xrNAhZoVdQ1lncsjPASKOj5Ky/AkxK8CiKPM8p87Ax4mJhy8U6dvbilLhY3Ha6cPuhmuPFTVApRHavWLw60ao7A+E/K9CFO6wiFn+RiRna39Fk4YL2lgcj9Jdf0Kff9Uxvgz50VbkRFtRHFOJloQSrDEVH7s4042vZrgxL78BUo73SFnhuFgpDP3vhC1XJxOxdVoSjoGTbxHLeE+qvNLzsTYen0bFozGiAFLO0UG8qxxfi4zcauSWVSIpswZhKgcJfyg1gmettRFXZrmxnW9EmEJoJxEUGlr/u3tutIit0zKssEjMCh8xLE8/dLCUsDx08mqc1o7HAU0S1AobpHIeza7im4f3pePymRQ/fnVSj80vZiPdJNwk99sMLhoJO/hGSDihg2Edz98zw4eEO2MlMv5AZ4IyKio8D0XkYqnKhDWxxs82Z2W3b8kyoztfqW38dqujCd2Zn+zCCI7H+5pEHI2aALnCDnl0DTavisalU/6Gd+fFg8ZvFyxshZhzosZQj8sz3Xik0EVFFYU7JtwVg4fLXH8ewgoRjMxlFtNSJEDB2W8uUxnxSZSOzlXC81Ex7W0F+pN+yaoLL89sukxCtSuPTWwiHsODEXn0GSnySoQqHVjYmoh9a+I6+jOeRsLxFM97+5fBNWkWNfrxIhfaZrgRqRHaxSz/zqCNHqGyP0Dqr4Tl/9UZplKWx3COxyMqC/6tHe8z3CdAku5QX8b3JQBJXkQA4vl5qhy/aSHmBEx9sLhP4z98Px1JRpvfPVJ5Pb6c7saCogZviRxMnyBi+VwJy18Vs3yHRVHeMUmZhzDWAY6rxS6NvofhPlqS3w5UgOQ4J0yKCnp/hNyGEepmmBpeoozNXUyN2rDO0qsARVYrRqobkGZfT3+fXLmG/v6vuS58PKkJpJQyLN8SqPFNRLl0eYXnHU0yjkUlQMnZoZXX4GhUQt/GExbqzwUiwGdTvB85X2XGGa2OzuPonEUwuV5EWPRkWB/eizBtM1zNpdTgD/ZnYNsWE85+lIpLp1MwIoLH+IJlKJi6DSM1E1E8YweGq5oQEy3Q5+tinO0M59wRiP2/YGT894WKMpzTjqfUK6wYw9bRzNyf8edj4y70Z3xvApAESDy2TZOKJZEmep3p3IjSWbuQZluHomnbIVU4MXtuEQ68lQmp3BvmiVk1VJDIxDrI9XNQPmc39FVrqWCqzPkYpnDS57uNLkg4/uuAIkDCCp+OYevacxTliJNX0xduVKf373ltLNqSE94LVIBlpXSegtT9CmUJvc6b/Cri8pdCnjwbI1QNCI/h8clhA44cyMDIW7XfUlJFBXh6VS79e1R0C5SGeVS0xPLVdOzDliYsKvFWA6m84fcDFuAv4Y6xIpnwD0bGvymR8T8QIW5nPGVG4u5ABWjNJx4ScF4bC6OiEgzrRGiUG8OUPJIyyjFpUgk+OmSg4U7Cf8+OLDzcWogThw04/p6BirBpYzaqrLYbmhQ3NZZMBRpVfCPWWRu9yXSQiXAaSYJ71MkDEqAtO3nPYCPgRJQOZYpSej1G48C25yJxbMc4XDzqTXZvvGakFWHJ4jwcezcdBRWVUCfafcnw64NlVy6dexpPLJ7nqwYfuN1Ycuv5g1ofSFj+JEmEA/I+ESBPfzBQATbavB56S5OChapsel1QnE+NJ2x7P6Wjs+sjLbCva5QLWL0q1yfApYNVVADC0EgXLYWXZroxJdtFkuz3JLcFZPxQtm40edGjKjMGLECB/migApyd5sZwOQ/SRZ7VxiGUcyDBUI6j270CfP5WssfX8Z1Koa3vkyvycGhvhl85vHSo6Rti/OF3l9NEmZdcT59/qxnaFLD3GRlfRQS4Xeb3Y4H+VKACEOYl1UMjt+HzqDisjszy1vHpeirAya0T2m/XCVIBjs698eWpp5BVMBnjIp04OdWN13lvdIk4R3nAAohkwiOkPpMyOGABilK/GIwAu5zeXqBVlUOToVVZQuf7lOZ0HN8Y7bmt8SdSOo4dWobs4imQcgKdVmSJnBDrbJdwwmmySr19yI/jFV2Xpky4c0c4W9tj/n+mjccWdSo2q9N6cGOG5VpvC6Cu3Gxv+K7rImhPfSOdqzZDPV0MvaZOxTltHBwRhdR76vHVmD27CM8/Z8bWl7P9+NomE9Y8kwN7jbU9LNKJ0SonNlR7l8Ut2bcWQzJHxm2Nl3DO4b0tT+O4mh5erlMWDXq52xeJEGemupEY68QozoHOjZBNagPyleWQ3Ob+sSqeNjyk9SWen2b2Zn6GFeYNMNwdHLmh8q+tmLVhMWVc3hQkKHsKUK4sxbi4RtS0/u2OWTBpDv3QF2oafG2xLsZJ+4JGZSFtjsg7P8jKxL4cE14xZvtF0+umbOyuLMRXM71T6W1XE1LG19/yPL9lQMZ3FWDKMwux/vhayrTq6X0KoDZM9P3uTvjo1uV+AhCen+4Gn1lPc8IwjkexsgyPqbKxsrACW4wWPwFeysvHKpsLc/IaoIvzGj4mxut9srUWEqgA7pXzr645urKNMKli6vW+BFClurHh4BI/rtq/DMsPLL/Zef9A2Lr5iUvdBSB8t9GbvVPLp4CN987l/kgSZoy55Ye6BQ9/89Dzj18etADGx3Nhe8NAqSqphE5Z3asA4Sk23+/uhIXPehc/fQnQ+T3WVzNQtN4E8woLzMtzfLQst8C8LAfZi3ORNjcfCc0liCiy4qcpwE7D9zU7067U7DS01exMO2vbaTiVt9p0sl8BXAWom2tCSUsOzI4CJJSUYmxGNUJ1tu8kKsf1ntHAtzNy/kuJsv7toeEOccAC6OfknajYathfvs2wlzVXXdQpqjt6E2B0vB3NT6bCvSIVzhV6SuOiDCQtzbye9nf96ZQ1qWeTn0m5mPy0/sqE1SnXJzylR3cmPJkKzYPe1rcvAbpzmJwHw1FDj3hPhYSHRKxgJ2VbwjpGkFOkARvdmwDqyWbfB44xV0Kn6D0CwhJqehjUnbqlaYh5OAvqaWZENOSBrSzGWEs5wvRVHmlM7Q9dDeszAqKqsD49B7uzjfg034B3zFmBh/c9EUBnQ9yCDETNzIaqOQeKugKEF5ViVLoVw+Nt7WJFnae790Qcf4PhhDPkXO9H7zlm9yfAtIRivy7yvgmgW5qGUelVvQpQoiilG6O9haeY5b9jWH4jOScQscJkEevMk7AOlYR1/KG/93YXYH+jd5doxgR/AfaYjd6szwrGeyKANLLOw8i9pzCE8fKeAiTJqzCcc3SsNeRiu8mEI7mZ+KIoDUnqag85uR3Me7sLsMnujYD5yQV+AryQaemMpqi7KgCjbfoNI+NfFLHCetI+MqyDZ1hhX7y8ur2r8f/UTCBeBqus9XT9MCIC2TghGyh3Q4CGLBeknBPrDDl+Ajjjy0hbfC00tP5XIfcaDCu8FM/5C0BXaTKHJ0Zl9zultcZVEAGui9h65k4FONjYRA44aRRuSLf43rHXbCRnhB4RKywJuR9gughAlsTuiHxv+LHCsfhIGxXgi8I0NOu8G5kB7733IsBeVyPkkeRgU2jrKsCbJiM4RS058Dw3RGX/072xuBtELL+D42o9rSoL2RKnHiF7BHRcWeuZl1yI0YofxwPecqJH4bVycn+j0YVyvbflFXPOCyLOYSHXLl05ymK822BiTrgglvPhIfcLIpY/7c24JBz5r0WscLLnuNM3PhgMkQkpvj0+lr96q8SV+43LfhwPuZ9gWGELwwonho4R/kimA8MKR/obHww6pwAjE+qHynlFZ43vazzkfoLhhEKxTHDTD+WEHPIx3ce7Xg8GQ1T235LKQ5LnQK7vonlBBBFEEEEEEUQQQQQRRBAh/5f4D4w7If1Nr6EEAAAAAElFTkSuQmCC"
-          className="rounded-sm col-span-1"
+          src={user?.photoURL}
+          className="rounded-full col-span-1 h-10 w-10"
         />
         <div className="text-white col-span-6">
           <textarea
@@ -21,70 +23,126 @@ const YourPost = () => {
             placeholder=" Bạn có gì muốn nói ?"
             className=" rounded w-full outline-none bg-transparent text-white  resize-none"></textarea>{" "}
           <div className="flex flex-row justify-start items-center gap-5">
-            <button>
+            <button className="btn-your-post">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                className="icon-svg"
+                viewBox="0 0 32 32"
                 fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6">
-                <path
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
                   strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                />
+                  strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M25.6 0H6.4C2.86538 0 0 2.86538 0 6.4V25.6C0 29.1346 2.86538 32 6.4 32H25.6C29.1346 32 32 29.1346 32 25.6V6.4C32 2.86538 29.1346 0 25.6 0Z"
+                    fill="url(#paint0_linear_103_1789)"></path>{" "}
+                  <path
+                    d="M5.9577 24.8845C5.42578 25.9483 6.19937 27.2 7.38878 27.2H18.2111C19.4005 27.2 20.1741 25.9483 19.6422 24.8845L14.231 14.0622C13.6414 12.8829 11.9585 12.8829 11.3688 14.0622L5.9577 24.8845Z"
+                    fill="white"></path>{" "}
+                  <path
+                    d="M15.5577 24.8845C15.0258 25.9483 15.7994 27.2 16.9888 27.2H24.6111C25.8005 27.2 26.5741 25.9483 26.0422 24.8845L22.231 17.2622C21.6414 16.0829 19.9585 16.0829 19.3688 17.2622L15.5577 24.8845Z"
+                    fill="white"
+                    fillOpacity="0.6"></path>{" "}
+                  <path
+                    d="M24.0002 11.2C25.7675 11.2 27.2002 9.76726 27.2002 7.99995C27.2002 6.23264 25.7675 4.79995 24.0002 4.79995C22.2329 4.79995 20.8002 6.23264 20.8002 7.99995C20.8002 9.76726 22.2329 11.2 24.0002 11.2Z"
+                    fill="white"></path>{" "}
+                  <defs>
+                    {" "}
+                    <linearGradient
+                      id="paint0_linear_103_1789"
+                      x1="16"
+                      y1="0"
+                      x2="16"
+                      y2="32"
+                      gradientUnits="userSpaceOnUse">
+                      {" "}
+                      <stop stopColor="#00E676"></stop>{" "}
+                      <stop offset="1" stopColor="#00C853"></stop>{" "}
+                    </linearGradient>{" "}
+                  </defs>{" "}
+                </g>
               </svg>
             </button>
-            <button>
+            <button className="btn-your-post">
               <svg
+                className="icon-svg"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6">
+                version="1.1"
+                viewBox="0 0 512 512"
+                xmlSpace="preserve">
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12.75 8.25v7.5m6-7.5h-3V12m0 0v3.75m0-3.75H18M9.75 9.348c-1.03-1.464-2.698-1.464-3.728 0-1.03 1.465-1.03 3.84 0 5.304 1.03 1.464 2.699 1.464 3.728 0V12h-1.5M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
-                />
+                  fill="#3CA8FA"
+                  d="M511.344 274.266c.426-6.035.656-12.123.656-18.266C512 114.615 397.385 0 256 0S0 114.615 0 256c0 117.769 79.53 216.949 187.809 246.801l323.535-228.535z"></path>
+                <path
+                  fill="#0076CF"
+                  d="M511.344 274.266L314.991 77.913 119.096 434.087l68.714 68.714C209.522 508.787 232.385 512 256 512c135.243 0 245.976-104.875 255.344-237.734z"></path>
+                <path
+                  fill="#FFF"
+                  d="M278.328 333.913L255.711 77.913 119.096 77.913 119.096 311.652z"></path>
+                <path
+                  fill="#E8E6E6"
+                  d="M392.904 311.652L392.904 155.826 337.252 133.565 314.991 77.913 255.711 77.913 256.067 333.913z"></path>
+                <path
+                  fill="#FFF"
+                  d="M314.991 155.826L314.991 77.913 392.904 155.826z"></path>
+                <path
+                  fill="#00477D"
+                  d="M119.096 311.652H392.90500000000003V434.087H119.096z"></path>
+                <g fill="#FFF">
+                  <path d="M243.242 372.42v20.66c-5.677 4.011-14.605 6.888-22.023 6.888-16.119 0-28.305-11.655-28.305-27.094 0-15.362 12.487-26.941 29.213-26.941 7.87 0 16.196 3.027 21.643 7.87l-7.568 9.157c-3.86-3.557-9.233-5.751-14.152-5.751-8.703 0-15.363 6.811-15.363 15.665 0 9.006 6.736 15.817 15.515 15.817 2.724 0 6.204-.984 9.384-2.573V372.42h11.656zM254.525 399.362v-52.975h13.471v52.975h-13.471zM293.956 356.982v12.26h23.763v10.596h-23.763v19.525h-13.471v-52.975h39.277v10.595h-25.806v-.001z"></path>
+                </g>
               </svg>
             </button>
-            <button>
-              {" "}
+            <button className="btn-your-post">
               <svg
+                className="icon-svg "
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                />
+                fill="#000"
+                version="1.1"
+                viewBox="0 0 508 508"
+                xmlSpace="preserve">
+                <g>
+                  <circle cx="254" cy="254" r="254" fill="#324A5E"></circle>
+                  <path
+                    fill="#2B3B4E"
+                    d="M14 336.8C48.4 436.4 142.8 508 254 508s206-71.6 240-171.2H14z"></path>
+                  <path
+                    fill="#FF7058"
+                    d="M381.2 191.6c0 70.4-127.2 258-127.2 258S126.8 262 126.8 191.6 183.6 64.4 254 64.4s127.2 57.2 127.2 127.2z"></path>
+                  <circle cx="254" cy="193.6" r="68.4" fill="#FFF"></circle>
+                  <circle cx="254" cy="193.6" r="36" fill="#FF7058"></circle>
+                </g>
               </svg>
             </button>
-            <button>
+            <button className="btn-your-post">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                className="w-7 h-7"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6">
-                <path
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z"
-                />
+                  stroke="#CCCCCC"
+                  strokeWidth="0.624"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z"
+                    fill="#4296FF"></path>{" "}
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M8.83216 14.4453C8.5258 13.9858 7.90493 13.8616 7.44541 14.168C6.98588 14.4743 6.8617 15.0952 7.16806 15.5547C9.46675 19.0028 14.5335 19.0028 16.8322 15.5547C17.1385 15.0952 17.0143 14.4743 16.5548 14.168C16.0953 13.8616 15.4744 13.9858 15.1681 14.4453C13.661 16.7059 10.3392 16.7059 8.83216 14.4453ZM17.0001 9.5C17.0001 10.3284 16.3285 11 15.5001 11C14.6717 11 14.0001 10.3284 14.0001 9.5C14.0001 8.67157 14.6717 8 15.5001 8C16.3285 8 17.0001 8.67157 17.0001 9.5ZM10.0001 9.5C10.0001 10.3284 9.32853 11 8.50011 11C7.67168 11 7.00011 10.3284 7.00011 9.5C7.00011 8.67157 7.67168 8 8.50011 8C9.32853 8 10.0001 8.67157 10.0001 9.5Z"
+                    fill="#152C70"></path>{" "}
+                </g>
               </svg>
             </button>
           </div>

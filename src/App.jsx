@@ -15,7 +15,10 @@ function App() {
       element: <HomeView />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "/messages", element: <Messages /> },
+        {
+          path: "messages/:idUser",
+          element: <Messages />,
+        },
         { path: "/music", element: <Music /> },
         { path: "/", element: <HomeContent /> },
       ],

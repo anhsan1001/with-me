@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { auth, database, provider } from "./config";
 import { GoogleAuthProvider } from "firebase/auth/cordova";
@@ -71,10 +72,17 @@ const addData = async () => {
     uid: "12334",
   });
 };
+
+const logOut = () => {
+  signOut(auth)
+    .then(() => {})
+    .catch((error) => {});
+};
 export {
   signGoogle,
   signWithPhonenumber,
   createUserWithPassword,
   addData,
   verifyOtp,
+  logOut,
 };

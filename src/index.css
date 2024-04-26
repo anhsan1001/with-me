@@ -3,9 +3,31 @@
 @tailwind utilities;
 
 .nav-item {
-  @apply flex flex-row gap-5 text-xl px-6 py-3 items-center;
+  @apply flex flex-row gap-5 text-xl mx-4 my-3 py-3 px-4 items-center  rounded-3xl w-fit hover:bg-[#202020];
 }
 
 .card-content {
   @apply bg-color-bg rounded my-3 text-white py-4;
+}
+
+.icon-svg {
+  @apply w-6 h-6 rounded-full;
+}
+
+.card-post {
+  @apply bg-color-bg rounded my-3 text-white;
+}
+
+.btn-post {
+  @apply flex flex-row gap-2 justify-end bg-[#202020] px-4 py-1 rounded-3xl;
+}
+
+.btn-your-post {
+  @apply w-10 h-10 hover:bg-[#202020] rounded-full flex justify-center items-center;
+}
+
+.li-trend {
+  @apply flex flex-col gap-2 my-3 cursor-pointer;
+}
+.li-nav {
 }

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { RiPlayListLine } from "react-icons/ri";
 import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
+import { logOut } from "../firebase/services";
 const Menu = () => {
   const { user } = useContext(AppContext);
   return (
@@ -65,7 +66,7 @@ const Menu = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/messages`} className="nav-item">
+            <NavLink to={`/messages/1`} className="nav-item">
               {" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +107,7 @@ const Menu = () => {
               <div className="tag-name">anhsan@</div>
             </div>
           </div>
-          <button className="logout">
+          <button className="logout" onClick={logOut}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
