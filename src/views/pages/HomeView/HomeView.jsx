@@ -1,8 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import Menu from "../../../components/Menu";
 import { auth } from "../../../firebase/config";
 import { useEffect, useState } from "react";
 import HotTrend from "../../../components/HotTrend";
+import { addUserIntoDatabase } from "../../../firebase/services";
+import Siderbar from "../../../components/Sidebar";
 
 const HomeView = () => {
   const navigate = useNavigate();
@@ -12,7 +13,14 @@ const HomeView = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (!user) {
+      if (user) {
+        const userInfor = {
+          displayName: user.displayName,
+          uid: user.uid,
+          photoURL: user.photoURL,
+        };
+        addUserIntoDatabase(userInfor);
+      } else {
         return navigate("/login");
       }
     });
@@ -30,7 +38,7 @@ const HomeView = () => {
   return (
     <div className="grid grid-cols-4 gap-3">
       <div className="col-span-1 ">
-        <Menu />
+        <Siderbar />
       </div>
       <div className={className}>
         <Outlet />

@@ -7,7 +7,19 @@ import {
 } from "firebase/auth";
 import { auth, database, provider } from "./config";
 import { GoogleAuthProvider } from "firebase/auth/cordova";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  equalTo,
+  get,
+  onChildChanged,
+  onChildRemoved,
+  onValue,
+  orderByChild,
+  query,
+  ref,
+  remove,
+  set,
+  update,
+} from "firebase/database";
 
 const signGoogle = () => {
   signInWithPopup(auth, provider)
@@ -66,23 +78,82 @@ const createUserWithPassword = (email, password, handleShowLoign) => {
     });
 };
 
-const addData = async () => {
-  await setDoc(doc(database, "user", "nha"), {
-    name: "Anh San",
-    uid: "12334",
-  });
-};
-
 const logOut = () => {
   signOut(auth)
     .then(() => {})
     .catch((error) => {});
 };
+
+const getDataFirebase = (collection, setData) => {
+  const startRef = ref(database, collection);
+  onValue(startRef, (data) => {
+    if (data.exists()) {
+      setData(data.val());
+    } else {
+      setData({});
+    }
+  });
+};
+
+const getDataFirebase2 = (collection, setData) => {
+  const startRef = ref(database, `${collection}`);
+  onValue(startRef, (data) => {
+    if (data.exists()) {
+      setData(data.val());
+      // console.log(data.val());
+    } else {
+      setData({});
+    }
+  });
+};
+
+const addFriend = (yourId, data) => {
+  if (yourId && data) {
+    update(ref(database, `friends/${yourId}/${data.uid}`), data).then(() => {
+      remove(ref(database, `friend-request/${yourId}/${data.uid}`), {});
+    });
+  }
+};
+
+const sendFriendRequest = (yourId, data) => {
+  if (yourId && data) {
+    set(ref(database, `friend-request/${yourId}/${data.uid}`), data);
+  }
+};
+
+const addMessages = (yourId, friendId, data) => {
+  const timestamp = new Date().getTime();
+  if (yourId && data) {
+    set(ref(database, `messages/${yourId}/${friendId}/${timestamp}`), data);
+  }
+};
+
+const addUserIntoDatabase = (data) => {
+  set(ref(database, `users/${data.uid}`), data);
+};
+
+const queryDataUsers = async (valueSearch, setUserSearch) => {
+  const mostViewedPosts = await query(
+    ref(database, "users"),
+    orderByChild(`displayName`),
+    equalTo(valueSearch)
+  );
+  get(mostViewedPosts).then((results) => {
+    setUserSearch(results.val());
+  });
+};
+
 export {
   signGoogle,
   signWithPhonenumber,
   createUserWithPassword,
-  addData,
   verifyOtp,
   logOut,
+  getDataFirebase,
+  addFriend,
+  addMessages,
+  addUserIntoDatabase,
+  queryDataUsers,
+  sendFriendRequest,
+  getDataFirebase2,
 };

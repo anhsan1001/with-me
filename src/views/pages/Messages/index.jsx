@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import Chat from "../../../components/Chat";
+
 import MessageList from "../../../components/MessageList";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -9,12 +9,12 @@ const Messages = () => {
   //   return navigate("/messages/1");
   // }, []);
   return (
-    <div className="grid grid-cols-3 ">
+    <div className="grid grid-cols-3 gap-3">
       <div className="col-span-1">
         <MessageList />
       </div>
       <div className="col-span-2">
-        <Chat />
+        <Outlet />
       </div>
     </div>
   );

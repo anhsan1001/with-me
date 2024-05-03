@@ -29,5 +29,14 @@
 .li-trend {
   @apply flex flex-col gap-2 my-3 cursor-pointer;
 }
-.li-nav {
+
+.icon-chat {
+  @apply w-10 h-10 rounded-full hover:bg-[#202020] p-2;
+}
+
+.avatar-btn {
+  @apply rounded-full h-10 w-10;
+}
+.flex-content {
+  @apply flex flex-row items-center justify-center;
 }
